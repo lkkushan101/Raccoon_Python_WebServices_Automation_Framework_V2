@@ -17,3 +17,18 @@ def send_get_request_with_Auth(request_url, user_name, password):
     r = requests.get(request_url, auth=HTTPBasicAuth(user_name, password))
     data = json.loads(r.content)
     return data
+def send_delete_request_with_header(request_url, header):
+    r = requests.delete(url=request_url, header={header})
+    return r
+def send_delete_request_with_Auth1_with_header(request_url,client_key, client_secret, resource_owner_key,resource_owner_secret, header):
+    authentication = OAuth1Session('client_key',
+                            client_secret='client_secret',
+                            resource_owner_key='resource_owner_key',
+                            resource_owner_secret='resource_owner_secret')
+    r = authentication.delete(request_url,  header={header})
+    data = json.loads(r.content)
+    return data
+def send_get_request_with_Auth_with_header(request_url, user_name, password, header):
+    r = requests.get(request_url, auth=HTTPBasicAuth(user_name, password), header={header})
+    data = json.loads(r.content)
+    return data

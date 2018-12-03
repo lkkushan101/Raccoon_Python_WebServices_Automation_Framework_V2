@@ -18,3 +18,19 @@ def send_get_request_with_Auth1(request_url,client_key, client_secret, resource_
     r = authentication.get(url)
     data = json.loads(r.content)
     return data
+def send_get_with_headers(request_url, headers ):
+    r = requests.get(request_url, headers={headers})
+    data = json.loads(r.content)
+    return data
+def send_get_request_with_Auth_and_headers(request_url, user_name, password, headers):
+    r = requests.get(request_url, auth=HTTPBasicAuth(user_name, password), headers={headers})
+    data = json.loads(r.content)
+    return data
+def send_get_request_with_Auth1(request_url,client_key, client_secret, resource_owner_key,resource_owner_secret, headesrs):
+    authentication = OAuth1Session('client_key',
+                            client_secret='client_secret',
+                            resource_owner_key='resource_owner_key',
+                            resource_owner_secret='resource_owner_secret')
+    r = authentication.get(request_url, headesrs={headesrs})
+    data = json.loads(r.content)
+    return data
